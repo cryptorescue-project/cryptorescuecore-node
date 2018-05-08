@@ -6,22 +6,22 @@ var path = require('path');
 var index = require('..');
 var log = index.log;
 
-var p2p = require('ravencore-p2p');
+var p2p = require('cryptorescuecore-p2p');
 var Peer = p2p.Peer;
 var Messages = p2p.Messages;
 var chai = require('chai');
-var ravencore = require('ravencore-lib');
-var Transaction = ravencore.Transaction;
-var BN = ravencore.crypto.BN;
+var cryptorescuecore = require('cryptorescuecore-lib');
+var Transaction = cryptorescuecore.Transaction;
+var BN = cryptorescuecore.crypto.BN;
 var async = require('async');
 var rimraf = require('rimraf');
-var ravend;
+var cryptorescued;
 
 /* jshint unused: false */
 var should = chai.should();
 var assert = chai.assert;
 var sinon = require('sinon');
-var RavencoinRPC = require('ravend-rpc');
+var CryptoRescueRPC = require('cryptorescued-rpc');
 var transactionData = [];
 var blockHashes = [];
 var txs = [];
@@ -29,9 +29,9 @@ var client;
 var messages;
 var peer;
 var coinbasePrivateKey;
-var privateKey = ravencore.PrivateKey();
-var destKey = ravencore.PrivateKey();
-var BufferUtil = ravencore.util.buffer;
+var privateKey = cryptorescuecore.PrivateKey();
+var destKey = cryptorescuecore.PrivateKey();
+var BufferUtil = cryptorescuecore.util.buffer;
 var blocks;
 
 describe('P2P Functionality', function() {
@@ -40,8 +40,8 @@ describe('P2P Functionality', function() {
     this.timeout(100000);
 
     // enable regtest
-    ravencore.Networks.enableRegtest();
-    var regtestNetwork = ravencore.Networks.get('regtest');
+    cryptorescuecore.Networks.enableRegtest();
+    var regtestNetwork = cryptorescuecore.Networks.get('regtest');
     var datadir = __dirname + '/data';
 
     rimraf(datadir + '/regtest', function(err) {
@@ -49,33 +49,33 @@ describe('P2P Functionality', function() {
         throw err;
       }
 
-      ravend = require('../').services.Ravencoin({
+      cryptorescued = require('../').services.CryptoRescue({
         spawn: {
           datadir: datadir,
-          exec: path.resolve(__dirname, '../bin/ravend')
+          exec: path.resolve(__dirname, '../bin/cryptorescued')
         },
         node: {
-          network: ravencore.Networks.testnet
+          network: cryptorescuecore.Networks.testnet
         }
       });
 
-      ravend.on('error', function(err) {
+      cryptorescued.on('error', function(err) {
         log.error('error="%s"', err.message);
       });
 
-      log.info('Waiting for Ravencoin Core to initialize...');
+      log.info('Waiting for CryptoRescue Core to initialize...');
 
-      ravend.start(function(err) {
+      cryptorescued.start(function(err) {
         if (err) {
           throw err;
         }
-        log.info('Ravend started');
+        log.info('CryptoRescued started');
 
-        client = new RavencoinRPC({
+        client = new CryptoRescueRPC({
           protocol: 'http',
           host: '127.0.0.1',
           port: 30331,
-          user: 'ravencoin',
+          user: 'cryptorescue',
           pass: 'local321',
           rejectUnauthorized: false
         });
@@ -130,11 +130,11 @@ describe('P2P Functionality', function() {
                         throw err;
                       }
                       utxo.privateKeyWIF = privresponse.result;
-                      var tx = ravencore.Transaction();
+                      var tx = cryptorescuecore.Transaction();
                       tx.from(utxo);
                       tx.change(privateKey.toAddress());
                       tx.to(destKey.toAddress(), utxo.amount * 1e8 - 1000);
-                      tx.sign(ravencore.PrivateKey.fromWIF(utxo.privateKeyWIF));
+                      tx.sign(cryptorescuecore.PrivateKey.fromWIF(utxo.privateKeyWIF));
                       txs.push(tx);
                       finished();
                     });
@@ -163,8 +163,8 @@ describe('P2P Functionality', function() {
     this.timeout(20000);
     peer.on('disconnect', function() {
       log.info('Peer disconnected');
-      ravend.node.stopping = true;
-      ravend.stop(function(err, result) {
+      cryptorescued.node.stopping = true;
+      cryptorescued.stop(function(err, result) {
         done();
       });
     });
@@ -176,7 +176,7 @@ describe('P2P Functionality', function() {
 
     var usedTxs = {};
 
-    ravend.on('tx', function(buffer) {
+    cryptorescued.on('tx', function(buffer) {
       var txFromResult = new Transaction().fromBuffer(buffer);
       var tx = usedTxs[txFromResult.id];
       should.exist(tx);

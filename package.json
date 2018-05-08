@@ -1,13 +1,13 @@
 {
-  "name": "ravencore-node",
-  "description": "Full node with extended capabilities using ravencore and Ravencoin",
+  "name": "cryptorescuecore-node",
+  "description": "Full node with extended capabilities using cryptorescuecore and CryptoRescue",
   "author": "BitPay <dev@bitpay.com>",
   "version": "3.1.3",
   "main": "./index.js",
-  "repository": "git://github.com/underdarkskies/ravencore-node.git",
-  "homepage": "https://github.com/underdarkskies/ravencore-node",
+  "repository": "git://github.com/cryptorescue-project/cryptorescuecore-node.git",
+  "homepage": "https://github.com/cryptorescue-project/cryptorescuecore-node",
   "bugs": {
-    "url": "https://github.com/underdarkskies/ravencore-node/issues"
+    "url": "https://github.com/cryptorescue-project/cryptorescuecore-node/issues"
   },
   "contributors": [
     {
@@ -27,12 +27,12 @@
     }
   ],
   "bin": {
-    "ravencore-node": "./bin/ravencore-node",
-    "ravend": "./bin/ravend"
+    "cryptorescuecore-node": "./bin/cryptorescuecore-node",
+    "cryptorescued": "./bin/cryptorescued"
   },
   "scripts": {
     "preinstall": "./scripts/download",
-    "verify": "./scripts/download --skip-ravencoin-download --verify-ravencoin-download",
+    "verify": "./scripts/download --skip-cryptorescue-download --verify-cryptorescue-download",
     "test": "mocha -R spec --recursive",
     "regtest": "./scripts/regtest",
     "jshint": "jshint --reporter=node_modules/jshint-stylish ./lib",
@@ -40,13 +40,13 @@
     "coveralls": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --recursive -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "tags": [
-    "ravencoin",
-    "ravennd"
+    "cryptorescue",
+    "cryptorescued"
   ],
   "dependencies": {
     "async": "^1.3.0",
-    "ravend-rpc": "underdarkskies/ravend-rpc",
-    "ravencore-lib": "underdarkskies/ravencore-lib",
+    "cryptorescued-rpc": "cryptorescue-project/cryptorescued-rpc",
+    "cryptorescuecore-lib": "cryptorescue-project/cryptorescuecore-lib",
     "body-parser": "^1.13.3",
     "colors": "^1.1.2",
     "commander": "^2.8.1",
@@ -69,7 +69,7 @@
   },
   "devDependencies": {
     "benchmark": "1.0.0",
-    "ravencore-p2p": "underdarkskies/ravencore-p2p",
+    "cryptorescuecore-p2p": "cryptorescue-project/cryptorescuecore-p2p",
     "chai": "^3.5.0",
     "coveralls": "^2.11.9",
     "istanbul": "^0.4.3",

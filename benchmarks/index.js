@@ -1,15 +1,15 @@
-Ravencore'use strict';
+CryptoRescueCore'use strict';
 
 var benchmark = require('benchmark');
-var ravencoin = require('ravencoin');
+var cryptorescue = require('cryptorescue');
 var async = require('async');
 var maxTime = 20;
 
-console.log('Ravencoin Service native interface vs. Ravencoin JSON RPC interface');
+console.log('CryptoRescue Service native interface vs. CryptoRescue JSON RPC interface');
 console.log('----------------------------------------------------------------------');
 
-// To run the benchmarks a fully synced Ravencoin directory is needed. The RPC comands
-// can be modified to match the settings in raven.conf.
+// To run the benchmarks a fully synced CryptoRescue directory is needed. The RPC comands
+// can be modified to match the settings in cryptorescue.conf.
 
 var fixtureData = {
   blockHashes: [
@@ -26,34 +26,34 @@ var fixtureData = {
   ]
 };
 
-var ravend = require('../').services.Ravencoin({
+var cryptorescued = require('../').services.CryptoRescue({
   node: {
-    datadir: process.env.HOME + '/.raven',
+    datadir: process.env.HOME + '/.cryptorescue',
     network: {
       name: 'testnet'
     }
   }
 });
 
-ravend.on('error', function(err) {
+cryptorescued.on('error', function(err) {
   console.error(err.message);
 });
 
-ravend.start(function(err) {
+cryptorescued.start(function(err) {
   if (err) {
     throw err;
   }
-  console.log('Ravencoin started');
+  console.log('CryptoRescue started');
 });
 
-ravend.on('ready', function() {
+cryptorescued.on('ready', function() {
 
-  console.log('Ravencoin ready');
+  console.log('CryptoRescue ready');
 
-  var client = new ravencoin.Client({
+  var client = new cryptorescue.Client({
     host: 'localhost',
     port: 18332,
-    user: 'raven',
+    user: 'cryptorescue',
     pass: 'local321'
   });
 
@@ -64,12 +64,12 @@ ravend.on('ready', function() {
       var hashesLength = fixtureData.blockHashes.length;
       var txLength = fixtureData.txHashes.length;
 
-      function ravendGetBlockNative(deffered) {
+      function cryptorescuedGetBlockNative(deffered) {
         if (c >= hashesLength) {
           c = 0;
         }
         var hash = fixtureData.blockHashes[c];
-        ravend.getBlock(hash, function(err, block) {
+        cryptorescued.getBlock(hash, function(err, block) {
           if (err) {
             throw err;
           }
@@ -78,7 +78,7 @@ ravend.on('ready', function() {
         c++;
       }
 
-      function ravendGetBlockJsonRpc(deffered) {
+      function cryptorescuedGetBlockJsonRpc(deffered) {
         if (c >= hashesLength) {
           c = 0;
         }
@@ -92,12 +92,12 @@ ravend.on('ready', function() {
         c++;
       }
 
-      function ravenGetTransactionNative(deffered) {
+      function cryptorescueGetTransactionNative(deffered) {
         if (c >= txLength) {
           c = 0;
         }
         var hash = fixtureData.txHashes[c];
-        ravend.getTransaction(hash, true, function(err, tx) {
+        cryptorescued.getTransaction(hash, true, function(err, tx) {
           if (err) {
             throw err;
           }
@@ -106,7 +106,7 @@ ravend.on('ready', function() {
         c++;
       }
 
-      function ravenGetTransactionJsonRpc(deffered) {
+      function cryptorescueGetTransactionJsonRpc(deffered) {
         if (c >= txLength) {
           c = 0;
         }
@@ -122,22 +122,22 @@ ravend.on('ready', function() {
 
       var suite = new benchmark.Suite();
 
-      suite.add('ravend getblock (native)', ravendGetBlockNative, {
+      suite.add('cryptorescued getblock (native)', cryptorescuedGetBlockNative, {
         defer: true,
         maxTime: maxTime
       });
 
-      suite.add('ravend getblock (json rpc)', ravendGetBlockJsonRpc, {
+      suite.add('cryptorescued getblock (json rpc)', cryptorescuedGetBlockJsonRpc, {
         defer: true,
         maxTime: maxTime
       });
 
-      suite.add('ravend gettransaction (native)', ravenGetTransactionNative, {
+      suite.add('cryptorescued gettransaction (native)', cryptorescueGetTransactionNative, {
         defer: true,
         maxTime: maxTime
       });
 
-      suite.add('ravend gettransaction (json rpc)', ravenGetTransactionJsonRpc, {
+      suite.add('cryptorescued gettransaction (json rpc)', cryptorescueGetTransactionJsonRpc, {
         defer: true,
         maxTime: maxTime
       });
@@ -158,7 +158,7 @@ ravend.on('ready', function() {
       throw err;
     }
     console.log('Finished');
-    ravend.stop(function(err) {
+    cryptorescued.stop(function(err) {
       if (err) {
         console.error('Fail to stop services: ' + err);
         process.exit(1);
