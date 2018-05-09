@@ -40,8 +40,8 @@ This will create a directory with configuration files for your node and install 
 
 There are several add-on services available to extend the functionality of CryptoRescueCore:
 
-- [Insight API](https://github.com/underdarkskies/insight-api)
-- [Insight UI](https://github.com/underdarkskies/insight-ui)
+- [Insight API](https://github.com/cryptorescue-project/insight-api)
+- [Insight UI](https://github.com/cryptorescue-project/insight-ui)
 - [CryptoRescueCore Wallet Service](https://github.com/cryptorescue-project/cryptorescuecore-wallet-service)
 
 ## Documentation
@@ -61,8 +61,9 @@ Please send pull requests for bug fixes, code optimization, and ideas for improv
 
 ## License
 
-Code released under [the MIT license](https://github.com/underdarkskies/cryptorescuecore-node/blob/master/LICENSE).
+Code released under [the MIT license](https://github.com/cryptorescue-project/cryptorescuecore-node/blob/master/LICENSE).
 
 Copyright 2013-2015 underdarkskies, Inc.
+Copyright 2018 CryptoRescue
 
 - bitcoin: Copyright (c) 2009-2015 Bitcoin Core Developers (MIT License)

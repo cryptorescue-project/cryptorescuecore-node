@@ -22,7 +22,7 @@ Services correspond with a Node.js module as described in 'package.json', for ex
   "dependencies": {
     "cryptorescuecore-lib": "cryptorescue-project/cryptorescuecore-lib",
     "cryptorescuecore-node": "cryptorescue-project/cryptorescuecore-node",
-    "insight-api": "underdarkskies/insight-api"
+    "insight-api": "cryptorescue-project/insight-api"
   }
 }
 ```

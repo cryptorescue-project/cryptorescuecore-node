@@ -1,6 +1,6 @@
 # Release Process
 
-Binaries for cryptorescued are distributed for convenience and built deterministically with Gitian, signatures for cryptorescued are located at the [gitian.sigs](https://github.com/underdarkskies/gitian.sigs) respository.
+Binaries for cryptorescued are distributed for convenience and built deterministically with Gitian, signatures for cryptorescued are located at the [gitian.sigs](https://github.com/cryptorescue-project/gitian.sigs) respository.
 
 ## How to Release
 
@@ -20,7 +20,7 @@ git push upstream master
 npm publish
 ```
 
-Create a release tag and push it to the Underdarkskies Github repo:
+Create a release tag and push it to the cryptorescue-project Github repo:
 
 ```bash
 git tag -s v<version> -m 'v<version>'
