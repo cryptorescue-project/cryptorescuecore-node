@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+var cryptorescuecore = require('../lib/cli/cryptorescuecore');
+cryptorescuecore();
