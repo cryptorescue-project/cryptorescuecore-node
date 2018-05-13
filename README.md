@@ -1,7 +1,7 @@
 CryptoRescueCore Node
 ============
-THANK YOU TO ALL THE RAVENCOIN DEVELOPERS FOR MAKING THIS FORK POSSIBLE. MOST CREDIT GOES TO THEM AND THE BITCOIN DEVS
-[RAVENCOIN DEVS](https://www.github.com/Ravenproject/Ravencoin)
+THANK YOU TO [UNDER](https://github.com/underdarkskies/) FOR MAKING THIS FORK POSSIBLE. MOST CREDIT GOES TO HIM AND THE BITCOIN DEVS
+[UNDER](https://www.github.com/underdarkskies/Ravencoin)
 
 
 A CryptoRescue full node for building applications and services with Node.js. A node is extensible and can be configured to run additional services. At the minimum a node has an interface to [CryptoRescue with additional indexing](https://github.com/cryptorescue-project/cryptorescue/tree/0.15.0-cryptorescuecore) for more advanced address queries. Additional services can be enabled to make a node more useful such as exposing new APIs, running a block explorer and wallet service.
