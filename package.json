@@ -31,6 +31,7 @@
     "cryptorescued": "./bin/cryptorescued"
   },
   "scripts": {
+    "preinstall": "./scripts/download",
     "test": "mocha -R spec --recursive",
     "regtest": "./scripts/regtest",
     "jshint": "jshint --reporter=node_modules/jshint-stylish ./lib",
